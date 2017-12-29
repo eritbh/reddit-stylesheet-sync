@@ -1,2 +1,28 @@
-@import "base";
-@import "header";
+// This is where you write your stylesheet!
+// Sass is supported, but since Sass is an extension of normal CSS, you can write normal CSS in this file just like on Reddit.
+
+// The following example stylesheet is bad, it's basically just a demonstration of how Sass works.
+$headerHeight: 135px;
+$bg: red;
+
+$sideBorderWidth: 1px;
+$sideBorderRadius: 5px;
+$sideBorderColor: #BBB;
+
+// Make the header taller and add a custom background
+#header {
+  height: $headerHeight;
+  background: $bg;
+}
+#header-bottom-left {
+  position: absolute;
+  bottom: 0;
+}
+
+.side {
+  margin: 0;
+  padding: 10px;
+  border-left: $sideBorderWidth solid $sideBorderColor;
+  border-bottom: $sideBorderWidth solid $sideBorderColor;
+  border-bottom-left-radius: $sideBorderRadius;
+}
