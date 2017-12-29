@@ -15,7 +15,7 @@ except Exception:
 try:
     skip_minify = not os.environ['REDDIT_SKIP_MINIFY'].lower() in ['0', 'false']
 except Exception:
-    skip_minify = false
+    skip_minify = False
 
 if not client_id or not client_secret:
     raise ValueError("Missing Reddit app credentials. Make sure you set the REDDIT_CLIENT_ID and REDDIT_CLIENT_SECRET environment variables in your Travis settings.")
