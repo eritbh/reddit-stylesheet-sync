@@ -16,3 +16,20 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
+
+# The script also allows you to pass a subreddit name as an argument rather than as an environment variable, allowing you to upload different branches to different subreddits. For example:
+
+# deploy:
+# - provider: script
+#   script: python .update/updateSubreddit.py mainSubreddit
+#   skip_cleanup: true
+#   on:
+#     branch: master
+# - provider: script
+#   script: python .update/updateSubreddit.py stagingSubreddit
+#   skip_cleanup: true
+#   on:
+#     branch: staging
+
+# With the above config, any changes to the master branch would go to /r/mainSubreddit, and any changes on the staging branch would go to /r/stagingSubreddit.
+# For another example of this, see https://github.com/r-anime/stylesheet/blob/master/.travis.yml
