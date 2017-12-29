@@ -1,4 +1,6 @@
-# this-is-a-repo [![Build Status](https://travis-ci.org/Geo1088/this-is-a-repo.svg?branch=master)](https://travis-ci.org/Geo1088/this-is-a-repo)
+# Reddit Stylesheet Sync [![Build Status](https://travis-ci.org/Geo1088/reddit-stylesheet-sync.svg?branch=master)](https://travis-ci.org/Geo1088/this-is-a-repo)
+
+A script used with Travis CI to link a subreddit's stylesheet with a Sass repository.
 
 ## To use
 
