@@ -12,6 +12,10 @@ try:
     sub_name = sys.argv[1]
 except Exception:
     sub_name = os.environ['REDDIT_SUBREDDIT']
+try:
+    skip_minify = not os.environ['REDDIT_SKIP_MINIFY'].lower() in ['0', 'false']
+except Exception:
+    skip_minify = false
 
 if not client_id or not client_secret:
     raise ValueError("Missing Reddit app credentials. Make sure you set the REDDIT_CLIENT_ID and REDDIT_CLIENT_SECRET environment variables in your Travis settings.")
@@ -32,10 +36,12 @@ print("Logged into Reddit as /u/{}".format(username))
 
 # Read stylesheet and minify it
 stylesheet_file = open(os.path.join(os.getcwd(), "style.css"), "r")
-stylesheet = compress(stylesheet_file.read()) # minify
-# stylesheet = stylesheet_file.read() # don't minify
+stylesheet = stylesheet_file.read()
 stylesheet_file.close()
-print("Got and minified stylesheet.")
+print("Got stylesheet.")
+if not skip_minify:
+    stylesheet = compress(stylesheet)
+    print("Minified stylesheet.")
 
 # Push the stylesheet to the subreddit
 print("Writing stylesheet to /r/{}".format(sub_name))
@@ -49,7 +55,7 @@ except Exception as e:
     print("Ran into an error while uploading stylesheet; aborting.")
     raise e
 
-print("That's a wrap")
+print("That's a wrap!")
 
 # TODO: Get and upload the sidebar
 
