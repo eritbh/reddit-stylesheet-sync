@@ -34,12 +34,13 @@ r = praw.Reddit(
     user_agent="script:geo1088/reddit-stylesheet-sync:v1.0 (written by /u/geo1088; run by /u/{})".format(username))
 print("Logged into Reddit as /u/{}".format(username))
 
-# Read stylesheet and minify it
-stylesheet_file = open(os.path.join(os.getcwd(), "style.css"), "r")
-stylesheet = stylesheet_file.read()
-stylesheet_file.close()
+# Read stylesheet and minify it if we need to
+with open(os.path.join(os.getcwd(), "style.css"), "r") as stylesheet_file:
+    stylesheet = stylesheet_file.read()
 print("Got stylesheet.")
-if not skip_minify:
+if skip_minify:
+    print("Skipping minification.")
+else:
     stylesheet = compress(stylesheet)
     print("Minified stylesheet.")
 
