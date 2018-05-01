@@ -1,6 +1,6 @@
 # Hi, if you're modifying this file to run yourself you should change the user agent, thanks.
 
-import praw, os
+import praw, os, re
 from csscompressor import compress
 
 # Read config from environment variables
@@ -34,10 +34,15 @@ r = praw.Reddit(
     user_agent="script:geo1088/reddit-stylesheet-sync:v1.0 (written by /u/geo1088; run by /u/{})".format(username))
 print("Logged into Reddit as /u/{}".format(username))
 
-# Read stylesheet and minify it if we need to
+# Read stylesheet
 with open(os.path.join(os.getcwd(), "style.css"), "r") as stylesheet_file:
     stylesheet = stylesheet_file.read()
 print("Got stylesheet.")
+
+# Strip leading @charset (Reddit doesn't allow it but Sass adds it sometimes)
+stylesheet = re.sub(r"^@charset.*\n", "", stylesheet)
+
+# Minify if we should
 if skip_minify:
     print("Skipping minification.")
 else:
